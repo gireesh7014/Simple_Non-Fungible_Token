@@ -181,4 +181,5 @@ This project is open source and available under the [MIT License](LICENSE).
 
 - Stacks Foundation for the blockchain platform
 - Clarity documentation and community
-<img width="1911" height="889" alt="Screenshot 2025-08-17 155113" src="https://github.com/user-attachments/assets/30c8ee4a-dc13-4ea2-ab2f-7d6c95f688f5" />
+- <img width="1911" height="889" alt="Screenshot 2025-08-17 155113" src="https://github.com/user-attachments/assets/143822b8-1d21-45be-a35b-f93dd2e0501f" />
+
