@@ -1,0 +1,18 @@
+---
+id: 0
+name: Testnet deployment
+network: testnet
+stacks-node: "https://api.testnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoind.testnet.stacks.co:18332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: simple-nft
+            expected-sender: ST1JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H
+            cost: 12890
+            path: "contracts\\simple-nft.clar"
+            anchor-block-only: true
+            clarity-version: 3
+      epoch: "3.2"
