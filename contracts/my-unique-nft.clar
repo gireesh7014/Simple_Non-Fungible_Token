@@ -1,9 +1,9 @@
-;; Simple Non-Fungible Token (NFT)
+;; Simple Non-Fungible Token (NFT) - Version 2
 ;; - Unique uint token IDs
 ;; - One owner per token
 ;; - Mint, transfer, read owner & metadata (token URI)
 
-(define-non-fungible-token simple-nft uint)
+(define-non-fungible-token simple-nft-v2 uint)
 
 ;; auto-incrementing token id
 (define-data-var last-id uint u0)
@@ -16,7 +16,7 @@
 
 ;; Read owner of a token: returns (some principal) or none
 (define-read-only (get-owner (id uint))
-  (nft-get-owner? simple-nft id)
+  (nft-get-owner? simple-nft-v2 id)
 )
 
 ;; Read token URI (metadata)
@@ -33,18 +33,18 @@
     (begin
       (var-set last-id new-id)
       (map-set token-uri { id: new-id } { uri: uri })
-      (nft-mint? simple-nft new-id to)   ;; (ok true) on success
+      (nft-mint? simple-nft-v2 new-id to)   ;; (ok true) on success
     )
   )
 )
 
 ;; Transfer `id` from caller to `to`
 (define-public (transfer (id uint) (to principal))
-  (let ((owner (nft-get-owner? simple-nft id)))
+  (let ((owner (nft-get-owner? simple-nft-v2 id)))
     (begin
       (asserts! (is-some owner) (err u404))
       (asserts! (is-eq (unwrap-panic owner) tx-sender) (err u403))
-      (nft-transfer? simple-nft id tx-sender to)
+      (nft-transfer? simple-nft-v2 id tx-sender to)
     )
   )
 )

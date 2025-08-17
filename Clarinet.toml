@@ -9,8 +9,8 @@ cache_dir = "./.cache"
 # path = "contracts/counter.clar"
 # epoch = "latest"
 
-[contracts.simple-nft]
-path = "contracts/simple-nft.clar"
+[contracts.my-unique-nft]
+path = "contracts/my-unique-nft.clar"
 epoch = "latest"
 
 

@@ -9,10 +9,10 @@ plan:
     - id: 0
       transactions:
         - contract-publish:
-            contract-name: simple-nft
+            contract-name: my-unique-nft
             expected-sender: ST1JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H
-            cost: 12890
-            path: "contracts\\simple-nft.clar"
+            cost: 13160
+            path: "contracts\\my-unique-nft.clar"
             anchor-block-only: true
             clarity-version: 3
       epoch: "3.2"

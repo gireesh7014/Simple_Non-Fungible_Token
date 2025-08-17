@@ -68,6 +68,29 @@ Simple_Non-Fungible_Token/
 └── README.md          # This file
 ```
 
+## Deployed Contract
+
+**Contract Name**: `my-unique-nft`  
+**Network**: Stacks Testnet  
+**Contract Address**: `ST1JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H.my-unique-nft`  
+
+### Contract Functions
+
+#### Read-Only Functions
+- `(get-owner (id uint))` - Returns the owner of a specific token ID
+- `(get-token-uri (id uint))` - Returns the metadata URI for a specific token ID
+
+#### Public Functions
+- `(mint (to principal) (uri (string-utf8 200)))` - Mints a new NFT to the specified address with metadata URI
+- `(transfer (id uint) (to principal))` - Transfers ownership of a token from the caller to another address
+
+### Contract Details
+- **Token Type**: Non-Fungible Token (NFT) with uint identifiers
+- **Token Name**: `simple-nft-v2`
+- **Auto-incrementing IDs**: Each new token gets a unique, sequential ID
+- **Metadata Support**: Each token can have an associated URI (up to 200 characters)
+- **Transfer Restrictions**: Only the current owner can transfer their tokens
+
 ## Smart Contract Features
 
 - **Minting**: Create new NFTs with unique identifiers
