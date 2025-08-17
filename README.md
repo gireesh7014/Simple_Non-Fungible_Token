@@ -1,80 +1,72 @@
 # Simple Non-Fungible Token (NFT)
 
-A simple NFT implementation built on the Stacks blockchain using Clarity smart contracts.
+A comprehensive NFT implementation built on the Stacks blockchain using Clarity smart contracts. This project demonstrates minting, transferring, and managing unique digital tokens with metadata support and auto-incrementing IDs.
 
-## Overview
+## Tech Stack Used
 
-This project demonstrates the creation and management of Non-Fungible Tokens (NFTs) on the Stacks blockchain. It includes smart contracts written in Clarity and configuration for testnet deployment.
+- **Blockchain**: Stacks Blockchain
+- **Smart Contract Language**: Clarity
+- **Development Framework**: Clarinet
+- **Testing**: Clarinet Test Suite
+- **Package Manager**: npm
+- **Version Control**: Git
+- **Deployment**: Testnet/Mainnet compatible
+- **Development Tools**: 
+  - Node.js
+  - TypeScript
+  - Vitest (for testing)
 
-## Features
+## Setup Instructions
 
-- NFT minting functionality
-- Token ownership tracking
-- Transfer capabilities
-- Metadata management
-- Testnet deployment ready
-
-## Prerequisites
-
+### Prerequisites
 - [Clarinet](https://github.com/hirosystems/clarinet) - Clarity development environment
 - [Stacks CLI](https://docs.stacks.co/docs/cli) - For blockchain interactions
-- Node.js (if using additional tooling)
+- Node.js (v16 or later)
+- Git
 
-## Installation
+### Installation Steps
 
-1. Clone the repository:
+1. **Clone the repository:**
 ```bash
 git clone https://github.com/gireesh7014/Simple_Non-Fungible_Token.git
 cd Simple_Non-Fungible_Token
 ```
 
-2. Install Clarinet (if not already installed):
+2. **Install Clarinet (if not already installed):**
 ```bash
 npm install -g @hirosystems/clarinet
 ```
 
-## Configuration
-
-The project includes testnet configuration in `settings/Testnet.toml`. For security reasons, you'll need to:
-
-1. Copy the example configuration
-2. Add your own mnemonic phrase
-3. Ensure the configuration file is not committed to version control
-
-## Usage
-
-### Testing
-
-Run tests using Clarinet:
+3. **Install project dependencies:**
 ```bash
+npm install
+```
+
+4. **Verify installation:**
+```bash
+clarinet check
+```
+
+5. **Run tests:**
+```bash
+npm test
+# or
 clarinet test
 ```
 
-### Deployment
+### Configuration for Deployment
 
-Deploy to testnet:
-```bash
-clarinet deploy --testnet
-```
+1. Copy the testnet configuration template
+2. Add your mnemonic phrase to `settings/Testnet.toml`
+3. Ensure sensitive files are not committed to version control
 
-## Project Structure
-
-```
-Simple_Non-Fungible_Token/
-├── contracts/          # Clarity smart contracts
-├── settings/           # Network configurations
-├── tests/             # Test files
-├── .gitignore         # Git ignore rules
-└── README.md          # This file
-```
-
-## Deployed Contract
+## Smart Contract Address (Deployed on Testnet)
 
 **Contract Name**: `my-unique-nft`  
 **Network**: Stacks Testnet  
 **Contract Address**: `ST1JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H.my-unique-nft`  
 
-### Contract Functions
+### Contract Functions Available
 
 #### Read-Only Functions
 - `(get-owner (id uint))` - Returns the owner of a specific token ID
@@ -84,19 +76,83 @@ Simple_Non-Fungible_Token/
 - `(mint (to principal) (uri (string-utf8 200)))` - Mints a new NFT to the specified address with metadata URI
 - `(transfer (id uint) (to principal))` - Transfers ownership of a token from the caller to another address
 
-### Contract Details
-- **Token Type**: Non-Fungible Token (NFT) with uint identifiers
-- **Token Name**: `simple-nft-v2`
-- **Auto-incrementing IDs**: Each new token gets a unique, sequential ID
-- **Metadata Support**: Each token can have an associated URI (up to 200 characters)
-- **Transfer Restrictions**: Only the current owner can transfer their tokens
+## How to Use the Project
 
-## Smart Contract Features
+### 1. Testing Locally
+```bash
+# Check contract syntax
+clarinet check
 
-- **Minting**: Create new NFTs with unique identifiers
-- **Transfer**: Transfer ownership between addresses
-- **Metadata**: Associate metadata with tokens
-- **Ownership**: Track current owner of each token
+# Run all tests
+npm test
+
+# Run specific test file
+npx vitest tests/simple-nft.test.ts
+```
+
+### 2. Deploying to Testnet
+```bash
+# Generate deployment plan
+clarinet deployments generate --testnet --low-cost
+
+# Deploy to testnet
+clarinet deployments apply --testnet
+```
+
+### 3. Interacting with the Contract
+
+#### Minting an NFT
+```clarity
+;; Mint a new NFT to an address with metadata
+(contract-call? .my-unique-nft mint 'ST1JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H "https://example.com/metadata/1.json")
+```
+
+#### Transferring an NFT
+```clarity
+;; Transfer token ID 1 to another address
+(contract-call? .my-unique-nft transfer u1 'ST2JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H)
+```
+
+#### Reading Token Information
+```clarity
+;; Get owner of token ID 1
+(contract-call? .my-unique-nft get-owner u1)
+
+;; Get metadata URI of token ID 1
+(contract-call? .my-unique-nft get-token-uri u1)
+```
+
+### 4. Using Stacks CLI
+```bash
+# Check contract status
+stx call_read_only_function ST1JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H my-unique-nft get-owner --testnet
+
+# Call contract function
+stx call_contract_func ST1JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H my-unique-nft mint --testnet
+```
+
+### Project Features
+
+- ✅ **Auto-incrementing Token IDs**: Each new token gets a unique, sequential ID
+- ✅ **Metadata Support**: Associate URIs with tokens (up to 200 characters)
+- ✅ **Ownership Tracking**: Track current owner of each token
+- ✅ **Transfer Functionality**: Secure token transfers between addresses
+- ✅ **Access Control**: Only token owners can transfer their tokens
+- ✅ **Testnet Ready**: Deployed and tested on Stacks testnet
+
+## Project Structure
+
+```
+Simple_Non-Fungible_Token/
+├── contracts/              # Clarity smart contracts
+│   └── my-unique-nft.clar # Main NFT contract
+├── deployments/           # Deployment configurations
+├── settings/              # Network configurations
+├── tests/                 # Test files
+├── package.json          # Project dependencies
+├── Clarinet.toml         # Clarinet configuration
+└── README.md             # This file
+```
 
 ## Security
 
