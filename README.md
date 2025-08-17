@@ -1,22 +1,62 @@
-# Simple Non-Fungible Token (NFT)
+# Simple Non-Fungible Token (NFT) On-Chain
 
-A comprehensive NFT implementation built on the Stacks blockchain using Clarity smart contracts. This project demonstrates minting, transferring, and managing unique digital tokens with metadata support and auto-incrementing IDs.
+## 📜 Project Description
+This project is a decentralized, on-chain implementation of a Non-Fungible Token (NFT) system, built using the Clarity smart contract language and deployed on the Stacks Testnet. The smart contract enables users to mint, transfer, and manage unique digital tokens with metadata support in a fully trustless and transparent environment, where every mint, transfer, and ownership change is verifiable on the blockchain.
 
-## Tech Stack Used
+The contract handles token creation, ownership tracking, metadata management, and secure transfers — all without any centralized server or intermediary.
+
+## 🔭 Project Vision
+The vision behind this project is to demonstrate the capabilities of decentralized digital asset management on the Stacks blockchain. By building an NFT system with auto-incrementing IDs and metadata support, we aim to:
+
+- Showcase the potential of Clarity smart contracts for digital asset creation and management.
+- Encourage developers and creators to explore on-chain NFT mechanics and tokenization.
+- Establish a foundation for more advanced and feature-rich blockchain-based digital collectibles.
+- Provide a simple yet robust foundation for NFT projects on the Stacks ecosystem.
+
+## ⭐ Key Features
+✅ **Mint New NFTs**: Users can create new unique tokens with custom metadata URIs and assign them to any address.  
+🔄 **Transfer Ownership**: Token owners can securely transfer their NFTs to other addresses with built-in validation.  
+🎮 **Track Ownership**: Easy querying of token ownership with read-only functions for transparency.  
+🧠 **Metadata Support**: Each token can have an associated URI (up to 200 characters) for linking to external metadata.  
+🏆 **Auto-incrementing IDs**: Automatic sequential ID assignment ensures each token is unique and easily identifiable.  
+💰 **Access Control**: Only the current token owner can transfer their tokens, ensuring security.  
+🔐 **On-chain Logic**: Entire NFT logic (ownership, metadata, and transfers) is stored and computed on-chain.
+
+## 🚀 Future Scope
+🧩 **NFT Marketplace Integration**: Build a front-end interface (e.g., React + Stacks.js) for users to mint, buy, and sell NFTs easily.  
+💬 **Enhanced Metadata**: Add support for richer metadata standards and IPFS integration for decentralized storage.  
+🪙 **Royalty System**: Implement creator royalties on secondary sales using advanced Clarity features.  
+👾 **Collection Features**: Introduce collection grouping, rarity traits, and batch minting capabilities.  
+🧪 **Advanced Testing**: Add comprehensive test coverage and security audits for production readiness.  
+🌍 **Cross-chain Bridging**: Enable NFT bridging to other blockchains for broader ecosystem compatibility.
+
+## 📋 Contract Details
+**Deployed Contract Address**: `ST1JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H.my-unique-nft`  
+**Network**: Stacks Testnet  
+**Token Standard**: Custom NFT implementation with uint identifiers  
+**Token Name**: `simple-nft-v2`
+
+### 🔧 Contract Functions
+
+#### Read-Only Functions
+- `(get-owner (id uint))` - Returns the owner of a specific token ID
+- `(get-token-uri (id uint))` - Returns the metadata URI for a specific token ID
+
+#### Public Functions
+- `(mint (to principal) (uri (string-utf8 200)))` - Mints a new NFT to the specified address with metadata URI
+- `(transfer (id uint) (to principal))` - Transfers ownership of a token from the caller to another address
+
+## 🛠️ Tech Stack Used
 
 - **Blockchain**: Stacks Blockchain
 - **Smart Contract Language**: Clarity
 - **Development Framework**: Clarinet
-- **Testing**: Clarinet Test Suite
+- **Testing**: Clarinet Test Suite & Vitest
 - **Package Manager**: npm
 - **Version Control**: Git
-- **Deployment**: Testnet/Mainnet compatible
-- **Development Tools**: 
-  - Node.js
-  - TypeScript
-  - Vitest (for testing)
+- **Development Tools**: Node.js, TypeScript
 
-## Setup Instructions
+## 🚀 Setup Instructions
 
 ### Prerequisites
 - [Clarinet](https://github.com/hirosystems/clarinet) - Clarity development environment
@@ -54,29 +94,7 @@ npm test
 clarinet test
 ```
 
-### Configuration for Deployment
-
-1. Copy the testnet configuration template
-2. Add your mnemonic phrase to `settings/Testnet.toml`
-3. Ensure sensitive files are not committed to version control
-
-## Smart Contract Address (Deployed on Testnet)
-
-**Contract Name**: `my-unique-nft`  
-**Network**: Stacks Testnet  
-**Contract Address**: `ST1JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H.my-unique-nft`  
-
-### Contract Functions Available
-
-#### Read-Only Functions
-- `(get-owner (id uint))` - Returns the owner of a specific token ID
-- `(get-token-uri (id uint))` - Returns the metadata URI for a specific token ID
-
-#### Public Functions
-- `(mint (to principal) (uri (string-utf8 200)))` - Mints a new NFT to the specified address with metadata URI
-- `(transfer (id uint) (to principal))` - Transfers ownership of a token from the caller to another address
-
-## How to Use the Project
+## 🎯 How to Use the Project
 
 ### 1. Testing Locally
 ```bash
@@ -122,25 +140,7 @@ clarinet deployments apply --testnet
 (contract-call? .my-unique-nft get-token-uri u1)
 ```
 
-### 4. Using Stacks CLI
-```bash
-# Check contract status
-stx call_read_only_function ST1JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H my-unique-nft get-owner --testnet
-
-# Call contract function
-stx call_contract_func ST1JAHE8GEHB0MCBGR8J6W0AA7TJEE1XKFSD2Q80H my-unique-nft mint --testnet
-```
-
-### Project Features
-
-- ✅ **Auto-incrementing Token IDs**: Each new token gets a unique, sequential ID
-- ✅ **Metadata Support**: Associate URIs with tokens (up to 200 characters)
-- ✅ **Ownership Tracking**: Track current owner of each token
-- ✅ **Transfer Functionality**: Secure token transfers between addresses
-- ✅ **Access Control**: Only token owners can transfer their tokens
-- ✅ **Testnet Ready**: Deployed and tested on Stacks testnet
-
-## Project Structure
+## 📁 Project Structure
 
 ```
 Simple_Non-Fungible_Token/
